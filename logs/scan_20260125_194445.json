@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260125_194445",
+  "date": "2026-01-25 19:44:45",
+  "url": "https://github.com",
+  "scan_type": "xss+sql+csrf",
+  "results": {
+    "header_issues": 2,
+    "xss_vulnerabilities": 0,
+    "sql_vulnerabilities": 25,
+    "csrf_vulnerabilities": 6,
+    "total_vulnerabilities": 33,
+    "score": 0,
+    "level": "CRITIQUE"
+  },
+  "vulnerabilities": [
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "X-Frame-Options incorrect",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    },
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "X-XSS-Protection incorrect",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    }
+  ]
+}

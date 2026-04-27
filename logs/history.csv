@@ -1,0 +1,7 @@
+timestamp,date,url,scan_type,total_vulnerabilities,score,level
+20260125_144749,2026-01-25 14:47:49,https://example.com,base,4,80,BON
+20260125_151131,2026-01-25 15:11:31,https://example.com,xss+sql+csrf,4,80,BON
+20260125_194052,2026-01-25 19:40:52,https://example.com,base,4,80,BON
+20260125_194233,2026-01-25 19:42:33,https://google.com,xss,4,80,BON
+20260125_194445,2026-01-25 19:44:45,https://github.com,xss+sql+csrf,2,0,CRITIQUE
+20260125_194908,2026-01-25 19:49:08,https://votresite.com,sql+csrf,3,55,MOYEN

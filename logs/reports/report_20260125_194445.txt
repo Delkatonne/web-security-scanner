@@ -1,0 +1,26 @@
+============================================================
+   RAPPORT DÉTAILLÉ DE SÉCURITÉ
+============================================================
+
+URL: https://github.com
+Date: 2026-01-25 19:44:45
+Type de scan: xss+sql+csrf
+Score: 0/100
+Niveau: CRITIQUE
+
+VULNÉRABILITÉS DÉTECTÉES:
+----------------------------------------
+
+1. En-tête manquant
+   Sévérité: MOYENNE
+   Description: X-Frame-Options incorrect
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+2. En-tête manquant
+   Sévérité: MOYENNE
+   Description: X-XSS-Protection incorrect
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+============================================================
+   FIN DU RAPPORT
+============================================================

@@ -1,0 +1,31 @@
+============================================================
+   RAPPORT DÉTAILLÉ DE SÉCURITÉ
+============================================================
+
+URL: https://votresite.com
+Date: 2026-01-25 19:49:08
+Type de scan: sql+csrf
+Score: 55/100
+Niveau: MOYEN
+
+VULNÉRABILITÉS DÉTECTÉES:
+----------------------------------------
+
+1. En-tête manquant
+   Sévérité: MOYENNE
+   Description: X-Frame-Options incorrect
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+2. En-tête manquant
+   Sévérité: MOYENNE
+   Description: X-XSS-Protection manquant
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+3. En-tête manquant
+   Sévérité: MOYENNE
+   Description: Strict-Transport-Security manquant
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+============================================================
+   FIN DU RAPPORT
+============================================================

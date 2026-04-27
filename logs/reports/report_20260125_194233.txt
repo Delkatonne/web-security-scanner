@@ -1,0 +1,36 @@
+============================================================
+   RAPPORT DÉTAILLÉ DE SÉCURITÉ
+============================================================
+
+URL: https://google.com
+Date: 2026-01-25 19:42:33
+Type de scan: xss
+Score: 80/100
+Niveau: BON
+
+VULNÉRABILITÉS DÉTECTÉES:
+----------------------------------------
+
+1. En-tête manquant
+   Sévérité: MOYENNE
+   Description: X-Content-Type-Options manquant
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+2. En-tête manquant
+   Sévérité: MOYENNE
+   Description: X-Frame-Options incorrect
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+3. En-tête manquant
+   Sévérité: MOYENNE
+   Description: X-XSS-Protection incorrect
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+4. En-tête manquant
+   Sévérité: MOYENNE
+   Description: Strict-Transport-Security manquant
+   Recommandation: Configurer les en-têtes de sécurité appropriés
+
+============================================================
+   FIN DU RAPPORT
+============================================================

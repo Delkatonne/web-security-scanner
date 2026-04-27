@@ -1,0 +1,35 @@
+{
+  "timestamp": "20260125_194908",
+  "date": "2026-01-25 19:49:08",
+  "url": "https://votresite.com",
+  "scan_type": "sql+csrf",
+  "results": {
+    "header_issues": 3,
+    "xss_vulnerabilities": 0,
+    "sql_vulnerabilities": 2,
+    "csrf_vulnerabilities": 0,
+    "total_vulnerabilities": 5,
+    "score": 55,
+    "level": "MOYEN"
+  },
+  "vulnerabilities": [
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "X-Frame-Options incorrect",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    },
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "X-XSS-Protection manquant",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    },
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "Strict-Transport-Security manquant",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    }
+  ]
+}

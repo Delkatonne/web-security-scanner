@@ -1,0 +1,41 @@
+{
+  "timestamp": "20260125_144749",
+  "date": "2026-01-25 14:47:49",
+  "url": "https://example.com",
+  "scan_type": "base",
+  "results": {
+    "header_issues": 4,
+    "xss_vulnerabilities": 0,
+    "sql_vulnerabilities": 0,
+    "csrf_vulnerabilities": 0,
+    "total_vulnerabilities": 4,
+    "score": 80,
+    "level": "BON"
+  },
+  "vulnerabilities": [
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "X-Content-Type-Options manquant",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    },
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "X-Frame-Options manquant",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    },
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "X-XSS-Protection manquant",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    },
+    {
+      "type": "En-tête manquant",
+      "severity": "MOYENNE",
+      "description": "Strict-Transport-Security manquant",
+      "recommendation": "Configurer les en-têtes de sécurité appropriés"
+    }
+  ]
+}
