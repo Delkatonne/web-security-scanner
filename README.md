@@ -20,3 +20,41 @@ Scanner de sécurité web professionnel pour détecter les vulnérabilités OWAS
 git clone https://github.com/Delkatonne/web-security-scanner.git
 cd web-security-scanner
 pip install -r requirements.txt
+## 📦 Installation
+
+```bash
+git clone https://github.com/Delkatonne/web-security-scanner.git
+cd web-security-scanner
+pip install -r requirements.txt
+
+---
+
+## **PROCHAINES AMÉLIORATIONS POSSIBLES :**
+
+### **Option 1 : Rendre le README plus professionnel**
+Ajoutez :
+- Logo
+- Badges
+- Captures d'écran
+- Exemples d'utilisation
+
+### **Option 2 : Activer GitHub Pages**
+Allez dans Settings → Pages → Source : "main" → Save
+Votre site sera sur : `https://delkatonne.github.io/web-security-scanner`
+
+### **Option 3 : Inviter des contributeurs**
+Les autres développeurs peuvent "fork" votre projet et proposer des améliorations.
+
+---
+
+## **RÉCAPITULATIF :**
+
+✅ Git initialisé  
+✅ Fichiers ajoutés  
+✅ Commit créé  
+✅ Lié à GitHub  
+✅ Code poussé en ligne  
+
+**Votre scanner de sécurité web est maintenant PUBLIC et ACCESSIBLE À TOUT LE MONDE !** 🌍
+
+**Que voulez-vous faire maintenant ?** 🚀
