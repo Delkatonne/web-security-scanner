@@ -1,1 +1,22 @@
-# web-security-scanner
+#🛡️ Web Security Scanner
+
+[![Python Version](https://img.shields.io/badge/python-3.7+-blue.svg)](https://python.org)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+Scanner de sécurité web professionnel pour détecter les vulnérabilités OWASP Top 10.
+
+## ✨ Fonctionnalités
+
+| Scanner | Description | Payloads |
+|---------|-------------|----------|
+| 🔍 En-têtes HTTP | Sécurité des en-têtes | 4 tests |
+| 🛡️ XSS | Cross-Site Scripting | 18 payloads |
+| 💉 SQL Injection | Injection SQL | 3 méthodes |
+| 🎭 CSRF | Cross-Site Request Forgery | Formulaire + cookies |
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/Delkatonne/web-security-scanner.git
+cd web-security-scanner
+pip install -r requirements.txt
