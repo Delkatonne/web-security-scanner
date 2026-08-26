@@ -4,9 +4,9 @@ import contextlib
 
 from flask import Flask, request, jsonify
 
-from xss_scanner import ScannerXSS
-from sql_scanner import ScannerSQL
-from csrf_scanner import ScannerCSRF
+from src.scanners.xss_scanner import ScannerXSS
+from src.scanners.sql_scanner import ScannerSQL
+from src.scanners.csrf_scanner import ScannerCSRF
 
 app = Flask(__name__)
 
