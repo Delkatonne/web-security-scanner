@@ -1,10 +1,22 @@
-from flask import Flask, request, jsonify, send_file
-import subprocess
-import os
-import tempfile
-import os
+import io
+import re
+import contextlib
+
+from flask import Flask, request, jsonify
+
+from xss_scanner import ScannerXSS
+from sql_scanner import ScannerSQL
+from csrf_scanner import ScannerCSRF
 
 app = Flask(__name__)
+
+# Retire les codes couleur ANSI (colorama) du texte capturé, pour un affichage propre côté web
+ANSI_RE = re.compile(r'\x1b\[[0-9;]*m')
+
+
+def _strip_ansi(texte):
+    return ANSI_RE.sub('', texte)
+
 
 HTML = '''
 <!DOCTYPE html>
@@ -88,7 +100,7 @@ HTML = '''
     <div class="container">
         <h1>🛡️ Web Security Scanner</h1>
         <p>Auditez la sécurité d'un site web gratuitement</p>
-        
+
         <input type="text" id="url" placeholder="https://exemple.com">
         <select id="scan_type">
             <option value="all">🔍 Audit complet (Recommandé)</option>
@@ -97,27 +109,27 @@ HTML = '''
             <option value="csrf">🎭 Scan CSRF uniquement</option>
         </select>
         <button onclick="startScan()">Lancer l'audit</button>
-        
+
         <div id="result" class="result"></div>
-        
+
         <div class="download">
             <p>📦 <a href="https://github.com/Delkatonne/web-security-scanner">Télécharger la version complète sur GitHub</a></p>
         </div>
     </div>
-    
+
     <script>
         async function startScan() {
             const url = document.getElementById('url').value;
             const scanType = document.getElementById('scan_type').value;
             const resultDiv = document.getElementById('result');
-            
+
             if (!url) {
                 resultDiv.innerHTML = '❌ Veuillez entrer une URL';
                 return;
             }
-            
+
             resultDiv.innerHTML = '<div class="loading">⏳ Scan en cours... (20-40 secondes)</div>';
-            
+
             try {
                 const response = await fetch('/scan', {
                     method: 'POST',
@@ -135,32 +147,58 @@ HTML = '''
 </html>
 '''
 
+
 @app.route('/')
 def index():
     return HTML
 
+
+def _run_scan(url, scan_type):
+    """Exécute les scanners directement en Python (pas de binaire externe)
+    et retourne le texte de sortie (prints capturés + rapport)."""
+    buffer = io.StringIO()
+
+    with contextlib.redirect_stdout(buffer):
+        if scan_type in ('all', 'xss'):
+            scanner = ScannerXSS(url)
+            scanner.tester_xss_reflechi()
+            print(scanner.generer_rapport())
+
+        if scan_type in ('all', 'sql'):
+            scanner = ScannerSQL(url)
+            scanner.executer_scan_complet()
+            print(scanner.generer_rapport())
+
+        if scan_type in ('all', 'csrf'):
+            scanner = ScannerCSRF(url)
+            scanner.analyser_formulaires()
+            print(scanner.generer_rapport())
+
+    return _strip_ansi(buffer.getvalue())
+
+
 @app.route('/scan', methods=['POST'])
 def scan():
-    data = request.json
-    url = data.get('url')
+    data = request.json or {}
+    url = data.get('url', '').strip()
     scan_type = data.get('type', 'all')
-    
-    # Utiliser l'exécutable qu'on a créé
-    exe_path = os.path.join(os.path.dirname(__file__), 'dist', 'websec.exe')
-    
-    if scan_type == 'all':
-        cmd = [exe_path, url, '--all']
-    else:
-        cmd = [exe_path, url, f'--{scan_type}']
-    
+
+    if not url:
+        return jsonify({'output': "❌ Veuillez fournir une URL"})
+
+    if not url.startswith(('http://', 'https://')):
+        url = 'https://' + url
+
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
-        return jsonify({'output': result.stdout})
-    except subprocess.TimeoutExpired:
-        return jsonify({'output': '⏰ Timeout - L\'analyse a pris trop de temps'})
+        output = _run_scan(url, scan_type)
+        if not output.strip():
+            output = "✓ Scan terminé, aucun résultat à afficher."
+        return jsonify({'output': output})
     except Exception as e:
         return jsonify({'output': f'❌ Erreur: {str(e)}'})
 
-    if __name__ == '__main__':
-        port = int(os.environ.get('PORT', 5000))
-        app.run(host='0.0.0.0', port=port)
+
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
