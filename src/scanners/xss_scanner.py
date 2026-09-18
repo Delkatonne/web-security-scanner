@@ -5,6 +5,13 @@ Scanner XSS (Cross-Site Scripting) simple
 import requests
 from colorama import Fore, Style
 
+# Sans User-Agent, de nombreux sites (Cloudflare, WAF, hébergeurs) bloquent
+# ou coupent silencieusement les requêtes envoyées par python-requests.
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                  '(KHTML, like Gecko) Chrome/124.0 Safari/537.36'
+}
+
 class ScannerXSS:
     def __init__(self, url_cible):
         self.url_cible = url_cible
@@ -66,7 +73,7 @@ class ScannerXSS:
             
             try:
                 # Envoyer la requête
-                reponse = requests.get(url_test, timeout=3)
+                reponse = requests.get(url_test, timeout=7, headers=HEADERS)
                 
                 # Vérifier si le payload est dans la réponse
                 if payload in reponse.text:

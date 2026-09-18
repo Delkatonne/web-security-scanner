@@ -6,6 +6,13 @@ import requests
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
 
+# Sans User-Agent, de nombreux sites bloquent ou coupent silencieusement
+# les requetes envoyees par python-requests.
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                  '(KHTML, like Gecko) Chrome/124.0 Safari/537.36'
+}
+
 class ScannerCSRF:
     def __init__(self, url_cible):
         self.url_cible = url_cible
@@ -18,7 +25,7 @@ class ScannerCSRF:
         
         try:
             # Récupérer le contenu de la page
-            reponse = requests.get(self.url_cible, timeout=5)
+            reponse = requests.get(self.url_cible, timeout=7, headers=HEADERS)
             soup = BeautifulSoup(reponse.text, 'html.parser')
             
             # Trouver tous les formulaires

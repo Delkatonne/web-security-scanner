@@ -6,6 +6,13 @@ import requests
 import time
 from colorama import Fore, Style
 
+# Sans User-Agent, de nombreux sites bloquent ou coupent silencieusement
+# les requetes envoyees par python-requests.
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                  '(KHTML, like Gecko) Chrome/124.0 Safari/537.36'
+}
+
 class ScannerSQL:
     def __init__(self, url_cible):
         self.url_cible = url_cible
@@ -48,14 +55,14 @@ class ScannerSQL:
             
             # Requête normale
             try:
-                reponse_normale = requests.get(url_base, timeout=5)
+                reponse_normale = requests.get(url_base, timeout=7, headers=HEADERS)
                 contenu_normale = reponse_normale.text
                 
                 for payload in self.payloads_boolean:
                     url_test = f"{self.url_cible}?{param}=1{payload}"
                     
                     try:
-                        reponse_test = requests.get(url_test, timeout=5)
+                        reponse_test = requests.get(url_test, timeout=7, headers=HEADERS)
                         
                         # Si la réponse est différente, possible injection
                         if reponse_test.text != contenu_normale:
@@ -104,7 +111,7 @@ class ScannerSQL:
                 url_test = f"{self.url_cible}?{param}=1{payload}"
                 
                 try:
-                    reponse = requests.get(url_test, timeout=5)
+                    reponse = requests.get(url_test, timeout=7, headers=HEADERS)
                     
                     # Chercher des messages d'erreur SQL dans la réponse
                     for erreur in messages_erreur_sql:
@@ -140,7 +147,7 @@ class ScannerSQL:
             
             try:
                 debut = time.time()
-                reponse = requests.get(url_test, timeout=10)
+                reponse = requests.get(url_test, timeout=10, headers=HEADERS)
                 duree = time.time() - debut
                 
                 if duree > seuil_delai:
